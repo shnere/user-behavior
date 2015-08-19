@@ -1,7 +1,9 @@
 var userLog = (function(){
-
+    //
     // Private variables
+    //
     var defaults = {
+
         // Available functionality
         clickCount: true,
         clickDetails: true,
