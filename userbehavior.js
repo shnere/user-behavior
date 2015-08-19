@@ -7,9 +7,16 @@ var userLog = (function(){
         clickDetails: true,
         mouseMovement: true,
         context: true,
+
+        actionItem: {
+            processOnAction: false,
+            selector: '',
+            event: ''
+        },
+        processTime: 15,
         processData: function(results){
             console.log(results);
-        }
+        },
     },
     // End results, what is shown to the user
     results = {
@@ -121,6 +128,15 @@ var userLog = (function(){
             // Check context change
             if(settings.context){
                 helperActions.contextChange();
+            }
+
+            // Event Listener to porcess
+            if(settings.actionItem.processOnAction){
+                var node = document.querySelector(settings.actionItem.selector);
+                if(!!!node) throw new Error('Selector was not found.');
+                node.addEventListener(settings.actionItem.event, function(){
+                    return processResults();
+                })
             }
 
             document.addEventListener('paste', function(){
