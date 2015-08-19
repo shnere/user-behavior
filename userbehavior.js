@@ -2,7 +2,6 @@ var userLog = (function(){
 
     // Private variables
     var defaults = {
-        timeCalculations: true,
         clickCount: true,
         clickDetails: true,
         mouseMovement: true,
@@ -98,10 +97,18 @@ var userLog = (function(){
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+
             // Countdown Timer
-            if(settings.timeCalculations){
-                helperActions.timer();
-            }
+            window.setInterval(function(){
+                if(document['visibilityState'] === 'visible'){
+                    results.time.timeOnPage++;
+                }
+                results.time.totalTime++;
+                // Check if we need to process results
+                if(settings.processTime > 0 && results.time.totalTime % settings.processTime === 0){
+                    processResults();
+                }
+            },1000);
 
             // Click registration, increment click counter and save click time+position
             if(settings.clickCount || settings.clickDetails){
