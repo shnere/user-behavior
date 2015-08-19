@@ -1,4 +1,5 @@
 var userLog = (function(){
+
     // Private variables
     var defaults = {
         timeCalculations: true,
@@ -6,12 +7,11 @@ var userLog = (function(){
         clickDetails: true,
         mouseMovement: true,
         context: true,
-
         processData: function(results){
             console.log(results);
         }
     },
-
+    // End results, what is shown to the user
     results = {
         time: {
             totalTime: 0,
@@ -30,7 +30,7 @@ var userLog = (function(){
     support = !!document.querySelector && !!document.addEventListener,
     settings;
 
-    // Private Functions
+    // Helper Functions
     var helperActions = {
         timer: function(){
             window.setInterval(function(){
@@ -60,7 +60,28 @@ var userLog = (function(){
 
     }
 
+    /**
+     * Merge defaults with options
+     * @private
+     * @param {Object} default settings
+     * @param {Object} user options
+     * @returns {Object} merged object
+     */
+    function getSettings(defaults, options){
+        var option;
+        for(option in options){
+            if(options.hasOwnProperty(option)){
+                defaults[option] = options[option];
+            }
+        }
+        return defaults;
+    }
 
+    /**
+     * Initialize the event listeners
+     * @public
+     * @param {Object} user options
+     */
     function init(options){
         if(!support) return;
 
@@ -106,27 +127,12 @@ var userLog = (function(){
                 return true;
             });
         });
-
     }
 
-    function getSettings(defaults, options){
-        var option;
-        for(option in options){
-            if(options.hasOwnProperty(option)){
-                defaults[option] = options[option];
-            }
-        }
-        return defaults;
-    }
-
-    function setOptions(opt){
-        if (opt && typeof opt === "object") {
-            options = opt;
-            return true;
-        }
-        return false;
-    }
-
+    /**
+     * Calls provided function with results as parameter
+     * @public
+     */
     function processResults(){
         if(settings.hasOwnProperty('processData')){
             return settings.processData.call(undefined, results);
@@ -137,8 +143,6 @@ var userLog = (function(){
     // Module pattern, only expose necessary methods
     return {
         init: init,
-        setOptions: setOptions,
-        results: results,
         processResults: processResults,
     };
 
