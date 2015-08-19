@@ -107,7 +107,7 @@ var userLog = (function(){
                     });
                 }
             });
-            document.addEventListener('keypress', function(){
+            document.addEventListener('keyup', function(){
                 var charCode    = event.keyCode || event.which,
                     charString  = String.fromCharCode(charCode);
 
