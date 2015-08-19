@@ -22,6 +22,13 @@ var userLog = (function(){
     },
     // End results, what is shown to the user
     results = {
+        userInfo: {
+            appCodeName: navigator.appCodeName || '',
+            appName: navigator.appName || '',
+            vendor: navigator.vendor || '',
+            platform: navigator.platform || '',
+            userAgent: navigator.userAgent || ''
+        },
         time: {
             totalTime: 0,
             timeOnPage: 0,
@@ -31,7 +38,6 @@ var userLog = (function(){
             clickDetails: []
         },
         mouseMovements: [],
-        pastedText: {},
         contextChange: [],
         keyLogger: [],
 
@@ -41,6 +47,11 @@ var userLog = (function(){
 
     // Helper Functions
     var helperActions = {
+        /**
+         * Set the timer interval, will increment time on page if the user is
+         * active on the page, totalTime counter always increments
+         * @private
+         */
         timer: function(){
             window.setInterval(function(){
                 if(document['visibilityState'] === 'visible'){
@@ -49,6 +60,10 @@ var userLog = (function(){
                 results.time.totalTime++;
             },1000);
         },
+        /**
+         * Detect the X,Y coordinates of the mouse movement
+         * @private
+         */
         mouseMovement: function(){
             document.addEventListener('mousemove', function(){
                 results.mouseMovements.push({
@@ -58,6 +73,10 @@ var userLog = (function(){
                 });
             });
         },
+        /**
+         * Check if the user is navigating to a different page
+         * @private
+         */
         contextChange: function(){
             document.addEventListener('visibilitychange', function(){
                 results.contextChange.push({
@@ -66,6 +85,10 @@ var userLog = (function(){
                 });
             });
         },
+        /**
+         * Log the pasted information and keys pressed
+         * @private
+         */
         keyLogger: function(){
             document.addEventListener('paste', function(){
                 var pastedText = undefined;
