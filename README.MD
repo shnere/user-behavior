@@ -34,7 +34,7 @@ The init function receives one object with custom settings:
   - mouseMovement
   - context
   - keyLogger
-- [actionItem](#### When to send this information?)
+- [actionItem](#when-to-send-this-information)
   - processOnAction: true/false
   - selector: CSS syntax selector
   - event: JS Event
