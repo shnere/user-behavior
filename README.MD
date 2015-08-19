@@ -34,12 +34,15 @@ The init function receives one object with custom settings:
   - mouseMovement
   - context
   - keyLogger
-- [actionItem](## What to do with the information acquired)
+- [actionItem](#### When to send this information?)
   - processOnAction: true/false
   - selector: CSS syntax selector
   - event: JS Event
 - processTime: interval in which processData function is called
 - processData: function to process results
+
+#### Sample
+This object will ignore the logging of mouse movement and print the information to the developer console once '#myActionItem' element is clicked.
 
 ```javascript
 userLog.init({
@@ -164,7 +167,93 @@ The results object contains detailed information of the requested information, t
             }
         ]
     },
-    "mouseMovements": [],
+    "mouseMovements": [
+        {
+            "timestamp": 1440004239170,
+            "x": 502,
+            "y": 412
+        },
+        {
+            "timestamp": 1440004239187,
+            "x": 502,
+            "y": 409
+        },
+        {
+            "timestamp": 1440004239203,
+            "x": 502,
+            "y": 406
+        },
+        {
+            "timestamp": 1440004239221,
+            "x": 502,
+            "y": 402
+        },
+        {
+            "timestamp": 1440004239237,
+            "x": 503,
+            "y": 398
+        },
+        {
+            "timestamp": 1440004239254,
+            "x": 507,
+            "y": 394
+        },
+        {
+            "timestamp": 1440004239272,
+            "x": 510,
+            "y": 390
+        },
+        {
+            "timestamp": 1440004239288,
+            "x": 513,
+            "y": 385
+        },
+        {
+            "timestamp": 1440004239304,
+            "x": 517,
+            "y": 378
+        },
+        {
+            "timestamp": 1440004239323,
+            "x": 520,
+            "y": 374
+        },
+        {
+            "timestamp": 1440004239341,
+            "x": 523,
+            "y": 370
+        },
+        {
+            "timestamp": 1440004239355,
+            "x": 524,
+            "y": 367
+        },
+        {
+            "timestamp": 1440004239371,
+            "x": 526,
+            "y": 365
+        },
+        {
+            "timestamp": 1440004239389,
+            "x": 528,
+            "y": 361
+        },
+        {
+            "timestamp": 1440004239406,
+            "x": 532,
+            "y": 357
+        },
+        {
+            "timestamp": 1440004239422,
+            "x": 537,
+            "y": 352
+        },
+        {
+            "timestamp": 1440004239440,
+            "x": 542,
+            "y": 349
+        },
+    ],
     "contextChange": [
         {
             "timestamp": 1440001429041,
