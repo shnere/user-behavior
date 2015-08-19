@@ -9,7 +9,7 @@ A collection of procedures that can provide valuable information on how the user
   - Node clicked (html representation of the node)
   - Click position
 - Mouse movement
-- Whenever the site goes out of context, like changing to another tab
+- Whenever the site goes out of context, like changing to another tab, window or program
 - Key Logger that detects key presses and pasted data information
 
 ## Getting Started
@@ -102,7 +102,7 @@ processData function can be called in two ways:
     }
     ```
 
-  2. Using an action item. An action item is an element in your website that is the main point of interest, Action Items are the conversion point that you want to achieve in that specific page e.g. click on the buy button
+  2. Using an action item. An action item is an element in your website that is the main point of interest, Action Items are the conversion point that you want to achieve in that specific page e.g. click on the buy button or when a form is submitted
 
     ```javascript
     {
