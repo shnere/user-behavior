@@ -13,15 +13,14 @@
   <script src="userbehavior.js"></script>
 
   <script>
-      userLog.setOptions({
+
+      userLog.init({
           generalInfo: true,
           actionItem: '.submit',
           processData: function(results){
               console.log(results);
           }
       });
-
-      userLog.start();
   </script>
 
   <style type="text/css">

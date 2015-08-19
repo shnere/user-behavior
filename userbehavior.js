@@ -1,6 +1,10 @@
 var userLog = (function(){
     // Private variables
-    var options = {},
+    var defaults = {
+        processData: function(results){
+            console.log(results);
+        }
+    },
 
     results = {
         time: {
@@ -15,10 +19,20 @@ var userLog = (function(){
         pastedText: {},
         contextChange: []
 
-    };
+    },
+
+    support = !!document.querySelector && !!document.addEventListener,
+    settings;
 
     // Private Functions
-    function start(){
+    function init(options){
+        if(!support) return;
+
+        // Extend default options
+        if (options && typeof options === "object") {
+            settings = getSettings(defaults, options);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Countdown Timer
             window.setInterval(function(){
@@ -63,6 +77,16 @@ var userLog = (function(){
 
     }
 
+    function getSettings(defaults, options){
+        var option;
+        for(option in options){
+            if(options.hasOwnProperty(option)){
+                defaults[option] = options[option];
+            }
+        }
+        return defaults;
+    }
+
     function setOptions(opt){
         if (opt && typeof opt === "object") {
             options = opt;
@@ -80,7 +104,7 @@ var userLog = (function(){
 
     // Module pattern, only expose necessary methods
     return {
-        start: start,
+        init: init,
         setOptions: setOptions,
         results: results,
         processResults: processResults,
