@@ -119,13 +119,15 @@ The results object contains detailed information of the requested information, t
 
 |Field   |Description   |
 |---|---|
-|userInfo   | Details of the    |
+|userInfo   | Details of the client like userAgent   |
 |time   | Time spent on the site in seconds  |
 |Mouse Movement   | Array of X,Y values with timestamps  |
 |contextChange   | Array with timestamp and type: if the user hid the page "hidden" or came back to it "visible"  |
 |keyLogger   | Array with objects that collect the timestamp, character pressed and if the user pasted the infromation  |
 
 ```
+
+#### Sample Response Object
 {
     "userInfo": {
         "appCodeName": "Mozilla",
