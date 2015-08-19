@@ -2,11 +2,14 @@ var userLog = (function(){
 
     // Private variables
     var defaults = {
+        // Available functionality
         clickCount: true,
         clickDetails: true,
         mouseMovement: true,
         context: true,
+        keyLogger: true,
 
+        // Action Item
         actionItem: {
             processOnAction: false,
             selector: '',
@@ -29,10 +32,10 @@ var userLog = (function(){
         },
         mouseMovements: [],
         pastedText: {},
-        contextChange: []
+        contextChange: [],
+        keyLogger: [],
 
     },
-
     support = !!document.querySelector && !!document.addEventListener,
     settings;
 
@@ -63,6 +66,35 @@ var userLog = (function(){
                 });
             });
         },
+        keyLogger: function(){
+            document.addEventListener('paste', function(){
+                var pastedText = undefined;
+                // Get Pasted Text
+                if (window.clipboardData && window.clipboardData.getData) {
+                    pastedText = window.clipboardData.getData('Text');
+                } else if (event.clipboardData && event.clipboardData.getData) {
+                    pastedText = event.clipboardData.getData('text/plain');
+                }
+
+                if(!!pastedText){
+                    results.keyLogger.push({
+                        timestamp: Date.now(),
+                        data: pastedText,
+                        type: 'paste'
+                    });
+                }
+            });
+            document.addEventListener('keypress', function(){
+                var charCode    = event.keyCode || event.which,
+                    charString  = String.fromCharCode(charCode);
+
+                results.keyLogger.push({
+                    timestamp: Date.now(),
+                    data: charString,
+                    type: 'keypress'
+                });
+            });
+        }
 
     }
 
@@ -137,6 +169,11 @@ var userLog = (function(){
                 helperActions.contextChange();
             }
 
+            // Key Logger
+            if(settings.keyLogger){
+                helperActions.keyLogger();
+            }
+
             // Event Listener to porcess
             if(settings.actionItem.processOnAction){
                 var node = document.querySelector(settings.actionItem.selector);
@@ -145,10 +182,6 @@ var userLog = (function(){
                     return processResults();
                 })
             }
-
-            document.addEventListener('paste', function(){
-                return true;
-            });
         });
     }
 
